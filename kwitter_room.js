@@ -11,7 +11,7 @@ const firebaseConfig = {
     };
     
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
        Room_names = childKey;
       //Start code
@@ -19,3 +19,10 @@ function getData() {firebase.database().ref("/").on('value', function(snapshot) 
       //End code
       });});}
 getData();
+function add_room(){
+      room=document.getElementById("room").value;
+      firebase.database().ref("/").child(room).update({
+            purpose:"Adding the room",
+      });
+      localStorage.setItem("room name",room);
+}
